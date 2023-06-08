@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 
-export const Stadistica =()=>{
+export const Estadistica =()=>{
     return (
         
     <div className="bg-light" style={{marginTop:20, padding:20}}>

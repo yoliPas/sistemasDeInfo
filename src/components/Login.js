@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {Menu} from './Menu';
+import axios from 'axios'
+import {login} from '../service/Usuario';
 
 export const Login =()=>{
 
   const [miLogin, setMiLogin] = useState("False");
+  const navigate = useNavigate()
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
-
-  console.log("hola mundo");
+  const [token, setToken] = useState({})
 
 
   function iniciarSesion(e){
@@ -17,22 +20,13 @@ export const Login =()=>{
     if(txtusu.length === 0 || txtpas.length === 0){
       alert("Complete los datos faltantes por favor.")
     }else{
-      if(usuario === "admin" && password === "123"){
-        setMiLogin("true");
-        document.getElementById("form_login").style.display ="none";
-      }else{
-        setMiLogin("false");
-        alert("Error de Usuario y/o Contraseña");
-        document.getElementById("txtusu").value = "";
-        document.getElementById("txtpas").value = "";
-        document.getElementById("txtusu").focus();
-      }
+          login(usuario, password)
+          navigate('/menu')
     }
   }
   return (
     
-    <div className="container" style={{background:"lightgray", marginTop:20, padding:20}}>
-        
+    <div className="container" style={{background:"lightgray", padding:20}}>
     <form id="form_login">
         <div>
             <h1 style={{color:"blue", textalign:"center"}}>LOGIN</h1>

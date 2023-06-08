@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
-import {getDepartamento} from "../service/Departamento"
+import { getCopropietario } from "../service/Copropietario";
 
 
-export const Listar =()=>{
+export const ListarCopropietario =()=>{
 
-  const [depa, setDepa] = useState([]);
+  const [coprop, setCoprop] = useState([]);
 
   useEffect(()=>{
-    getDepartamento().then(data => setDepa(data))
+    getCopropietario().then(data => setCoprop(data))
   },[]);
 
 
@@ -16,7 +16,7 @@ export const Listar =()=>{
     <div className="bg-light" style={{marginTop:20, padding:20}}>
 
         <div className="h3">
-          Lista De Departamentos
+          Lista De Copropietarios
         </div>
 
         <div className="table-responsive">
@@ -25,23 +25,26 @@ export const Listar =()=>{
                 <thead className="text-center" style={{background:"lightgray"}}>
                     <tr>
                         <th>#</th>
-                        <th>Superficie</th>
-                        <th>Ambiente</th>
-                        <th>Torre</th>
-                        <th>Dirección</th>
-                        <th>Num Departamento</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Corrreo</th>
+                        <th>Direccion</th>
+                        <th>Teléfono</th>
+                        <th>Departamento</th>
+                        
                     </tr>
                 </thead>
                 <tbody className="text-center align-baseline">
                     {
-                      depa.map((x, index)=>(
+                      coprop.map((x, index)=>(
                         <tr key={index}>
                           <th>{index+1}</th>
-                          <td>{x.superficie}</td>
-                          <td>{x.ambientes}</td>
-                          <td>{x.torre}</td>
+                          <td>{x.name}</td>
+                          <td>{x.last_name}</td>
+                          <td>{x.email}</td>
                           <td>{x.direccion}</td>
-                          <td>{x.numero_depar}</td>
+                          <td>{x.telefono}</td>
+                          <td>{x.id_departamento}</td>
                         </tr>
                       ))
                     }
