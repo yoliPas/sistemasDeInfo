@@ -54,7 +54,7 @@ export const RegistroConserje = () => {
             <div className="h4" style={{color: "white", textAlign: "center"}}>
          Registro De Conserje
         </div>
-             <div className="row col-12">
+            <div className="row col-12">
             <div className="col-6">
               <label>Email:</label>
               <input
