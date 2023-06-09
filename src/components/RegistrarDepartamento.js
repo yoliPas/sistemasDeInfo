@@ -51,7 +51,7 @@ export const Registrar = () => {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100" style={{ marginTop: 20, padding: 20 }}>
+    <div className="container d-flex justify-content-center align-items-center vh-100" style={{ marginTop: 20, marginLeft: 120,padding: 20 }}>
 
       <form id="miFormulario" onSubmit={handleSubmit}>
         <div className="h4" style={{ color: "white", textAlign: "center" }}>
@@ -131,13 +131,6 @@ export const Registrar = () => {
           </div>
         </div>
 
-        <div className="col-md-6">
-          {formulario.foto && (
-            <img src={formulario.foto} alt="Foto" className="img-fluid" style={{ width: "300px", height: "300px" }} />
-          )}
-          <input type="file" name="foto" onChange={handleChange} />
-
-        </div>
 
         <div className="row" style={{ marginTop: 20 }}>
           <div className="col-6">
@@ -185,6 +178,14 @@ export const Registrar = () => {
           </div>
         </div>
       </form>
+      <div className="col-md-6" style={{ marginTop:10, marginLeft: 200, borderColor: "red", border: "0"}}>
+          {formulario.foto && (
+            <img src={formulario.foto} alt="Foto" className="img-fluid" style={{ width: "300px", height: "300px" }} />
+          )}
+          <input type="file" name="foto" onChange={handleChange} />
+
+        </div>
     </div>
+    
   );
 };
