@@ -1,9 +1,10 @@
 import React from "react";
 import Home from "../assets/proyecto.png"
-
+import {Menu} from './Menu';
 
 export const MenuPrincipal =()=>{
     return(
+        
         <div className=" d-flex  vh-100"  style={{ display: 'flex', flexDirection: 'column' }}>
             <section style={{background: 'linear-gradient(to bottom, transparent, #333333)', width:"100%", height: "75%", margin:0, padding:0}} >
             <div className="container">

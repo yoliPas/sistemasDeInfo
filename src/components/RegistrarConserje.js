@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { enviarDatosConserje } from "../service/Conserje";
-import { useNavigate } from 'react-router-dom';
-import { Menu } from './Menu';
-import { useHistory } from 'react-router-dom';
-
-
+import { useNavigate } from "react-router-dom";
 
 export const RegistroConserje = () => {
   const [formData, setFormData] = useState({
@@ -17,17 +13,20 @@ export const RegistroConserje = () => {
     antecedentes: "",
     direccion: "",
     telefono: "",
-    foto: ""
-
+    foto: "",
   });
 
-  const navigate = useNavigate()
-  const [list, setList] = useState("");
-  const [esta, setEsta] = useState("");
-  const [menu, setMenu] =useState("1");
+  const handleGuardarDatos = () => {
+    const confirmacion = window.confirm('¿Deseas guardar los datos?');
+    if (confirmacion) {
+      // Lógica para guardar los datos aquí
+      alert('Los datos se han guardado exitosamente.');
+    }};
+
+  const navigate = useNavigate();
 
   const RedireccionarMenu = (e) => {
-    navigate('/')
+    navigate("/menu");
   };
 
   const handleChange = (e) => {
@@ -45,25 +44,20 @@ export const RegistroConserje = () => {
     }
   };
 
-
   const handleSubmit = async (e) => {
-
     e.preventDefault();
 
-
-    enviarDatosConserje(formData)
-      .then(responseData => {
-        console.log(responseData);
-      });
-
-
+    enviarDatosConserje(formData).then((responseData) => {
+      console.log(responseData);
+    });
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-
-
-      <form onSubmit={handleSubmit} style={{ marginTop: '-50px' }}>
+    <div
+      className="container d-flex justify-content-center align-items-center vh-100"
+      style={{ width: "70%", marginLeft: 50}}
+    >
+      <form onSubmit={handleSubmit} style={{ marginTop: "-50px" }}>
         <div className="h4" style={{ color: "white", textAlign: "center" }}>
           Registro De Conserje
         </div>
@@ -167,26 +161,28 @@ export const RegistroConserje = () => {
               className="form-control"
             />
           </div>
-
         </div>
-        <div className="col-md-6">
-          {formData.foto && (
-            <img src={formData.foto} alt="Foto" className="img-fluid" style={{ width: "300px", height: "300px" }} />
-          )}
-          <input type="file" name="foto" onChange={handleChange} />
-
-        </div>
+        
         <div className="row" style={{ marginTop: 10 }}>
           <div className="col">
-            <button className="btn btn-dark" >Guardar Datos</button>
+            <button className="btn btn-dark" onClick={handleGuardarDatos}>Guardar</button>
           </div>
           <div className="col">
             <button className="btn btn-dark">Cancelar</button>
           </div>
         </div>
       </form>
-
+      <div className="col-md-6" style={{ marginLeft: "auto", marginRight: "auto"}}>
+          {formData.foto && (
+            <img
+              src={formData.foto}
+              alt="Foto"
+              className="img-fluid"
+              style={{ width: "300px", height: "300px", display: "block", margin: "auto"  }}
+            />
+          )}
+          <input type="file" name="foto" onChange={handleChange} style={{ display: "block", margin: "auto", marginLeft:150 }} />
+        </div>
     </div>
   );
 };
-

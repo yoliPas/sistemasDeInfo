@@ -2,7 +2,10 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { Login } from './components/Login';
 import { Menu } from './components/Menu';
+import { MenuPrincipal } from './components/MenuPrincipal';
 import { Registrar} from './components/RegistrarDepartamento'
+
+
 import './App.css'; 
 function App() {
   return (
@@ -11,6 +14,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Login/>}/>
           <Route exact path='/menu' element={<Menu/>}/>
+          
         </Routes>
       </BrowserRouter> 
     </div>

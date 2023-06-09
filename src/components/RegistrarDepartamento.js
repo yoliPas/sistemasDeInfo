@@ -17,6 +17,12 @@ export const Registrar = () => {
     boulera: false
   });
 
+  const handleGuardarDatos = () => {
+    const confirmacion = window.confirm('¿Deseas guardar los datos?');
+    if (confirmacion) {
+      alert('Los datos se han guardado exitosamente.');
+    }};
+
   const handleChange = (e) => {
     if (e.target.name === "foto") {
       const file = e.target.files[0];
@@ -51,7 +57,7 @@ export const Registrar = () => {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100" style={{ marginTop: 20, marginLeft: 120,padding: 20 }}>
+    <div className="container d-flex justify-content-center align-items-center vh-100" style={{ marginTop: -30, marginLeft: 120,padding: 20}}>
 
       <form id="miFormulario" onSubmit={handleSubmit}>
         <div className="h4" style={{ color: "white", textAlign: "center" }}>
@@ -171,7 +177,7 @@ export const Registrar = () => {
 
         <div className="row" style={{ marginTop: 10 }}>
           <div className="col">
-            <button className="btn btn-dark">Guardar Datos</button>
+            <button className="btn btn-dark" onClick={handleGuardarDatos}>Guardar</button>
           </div>
           <div className="col">
             <button className="btn btn-dark">Cancelar</button>
