@@ -8,14 +8,16 @@ import {RegistroForm} from "./registrarCopropietario"
 import { RegistroConserje } from "./RegistrarConserje";
 import { ListarConserje } from "./ListarConserje";
 import { ListarCopropietario } from "./ListarCopropietario";
+import { MenuPrincipal } from "./MenuPrincipal";
+import Logo from "../assets/logo.jpeg"
 
 export const Menu =(props)=>{
 
   const navigate = useNavigate()
 
-  const [reg, setReg] = useState("");
   const [list, setList] = useState("");
   const [esta, setEsta] = useState("");
+  const [menu, setMenu] =useState("1");
   const [showRegistrar, setShowRegistrar] = useState(false);
   const [showConserje, setShowConserje] = useState(false);
   const [showCopropietario, setShowCopropietario] = useState(false);
@@ -36,6 +38,8 @@ export const Menu =(props)=>{
     setActualizarProp(false)
     setEsta("0");
     setList("0");
+    setMenu("0");
+
   };
   const handleActualizar = (event) => {
     const tipo = event.target.value;
@@ -48,35 +52,46 @@ export const Menu =(props)=>{
     setShowCopropietario(false)
     setEsta("0");
     setList("0");
+    setMenu("0");
+
   };
 
 
   function cerrarSesion (){
     navigate("/")
   }
-  
-  function openRegist(){
-    setReg("1");
+
+
+  function openMenu(){
+    setMenu("1");
     setEsta("0");
     setList("0");
+    setShowRegistrar(false)
+    setShowConserje(false)
+    setShowCopropietario(false)
+    setActualizarCons(false)
+    setActualizarDpto(false)
+    setActualizarProp(false)
   }
 
   function openList(){
     setShowRegistrar(false)
     setShowConserje(false)
     setShowCopropietario(false)
-    setReg("0");
     setEsta("0");
     setList("1");
+    setMenu("0");
+
   }
 
   function openEst(){
     setShowRegistrar(false)
     setShowConserje(false)
     setShowCopropietario(false)
-    setReg("0");
     setEsta("1");
     setList("0");
+    setMenu("0");
+
   }
 
     return (
@@ -86,8 +101,9 @@ export const Menu =(props)=>{
                   
         <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor: '#474547'}}>
           <div className="container-fluid">
+            <img src={Logo} style={{ width: "45px", height: "45px" }}></img>
+            <NavLink to="" className="nav-link  h5  text-center" style={{color:"white"}} onClick={openMenu}>SEGULIM</NavLink>
 
-            <label className="navbar-brand  h5" href="/">Menú Principal</label>
             
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
@@ -95,14 +111,14 @@ export const Menu =(props)=>{
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup" style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start'}}>
               <div className="navbar-nav">
                 
-                  <select value={tipoRegistro} onChange={handleTipoRegistroChange} style={{margin:10}}>
-                    <option value="">Seleccionar tipo de registro</option>
+                  <select value={tipoRegistro} onChange={handleTipoRegistroChange} style={{margin:10, backgroundColor: '#474547', color: "white", border: "none", fontWeight:"bold", fontSize:"18px"}}>
+                    <option value="" >Seleccionar tipo de registro</option>
                     <option value="tipo1">Departamento</option>
                     <option value="tipo2">Conserje</option>
                     <option value="tipo3">Copropietario</option>
                   </select>
                   
-                  <select onChange={handleActualizar} style={{margin:10}}>
+                  <select value={tipoRegistro}  onChange={handleActualizar} style={{margin:10, backgroundColor: '#474547', color: "white", border: "none", fontWeight:"bold", fontSize:"18px"}}>
                     <option value="">Actualizar</option>
                     <option value="tipo1">Departamento</option>
                     <option value="tipo2">Conserje</option>
@@ -148,6 +164,7 @@ export const Menu =(props)=>{
           <ListarCopropietario/>
         </div>
       )}
+      {menu==="1" && <MenuPrincipal/>}
       {list === "1" && <Listar/>}
       {esta === "1" && <ListarConserje/>}
     </>

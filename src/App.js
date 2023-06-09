@@ -6,7 +6,7 @@ import { Registrar} from './components/RegistrarDepartamento'
 import './App.css'; 
 function App() {
   return (
-    <div className="App" >
+    <div className="App  vh-100" >
       <BrowserRouter>
         <Routes>
           <Route exact path='/' element={<Login/>}/>

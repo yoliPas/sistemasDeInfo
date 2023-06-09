@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Menu} from './Menu';
-import axios from 'axios'
 import {login} from '../service/Usuario';
 
 export const Login =()=>{
@@ -25,11 +24,12 @@ export const Login =()=>{
     }
   }
   return (
-    
-    <div className="container" style={{background:"lightgray", padding:20}}>
+    <div className="container d-flex justify-content-center align-items-center vh-100" >
+
+    <div  style={{background:"lightgray", padding:20, width:"350px", height:"350px", borderRadius:"10px"}}>
     <form id="form_login">
-        <div>
-            <h1 style={{color:"blue", textalign:"center"}}>LOGIN</h1>
+        <div style={{padding: "10px"}}>
+            <h1 style={{color:'#474547', textAlign:"center"}}>LOGIN</h1>
             <label htmlFor="txtusu"><strong>Username</strong></label>
             <input type="text" id="txtusu" style={{textAlign:"center"}} className="form-control" onChange={(e)=>setUsuario(e.target.value)} required/>
         </div>
@@ -37,9 +37,12 @@ export const Login =()=>{
             <label htmlFor="txtpas"><strong>Password</strong></label>
             <input type="password" id="txtpas" style={{textAlign:"center"}} className="form-control" onChange={(e)=>setPassword(e.target.value)}  required/>
         </div><br/>
-        <input type="submit"  className="btn btn-primary" value="Login" onClick={iniciarSesion}/>
+        <div style={{ display: "flex", justifyContent:"center", marginTop:"30px"}}>        
+        <input type="submit"  className="btn btn-dark" value="Login" onClick={iniciarSesion} style={{justifyContent:"center"}}/>
+</div>
     </form>
     {miLogin === "true" && <Menu usu={usuario}/>}
+</div>
 </div>
   )
 }
