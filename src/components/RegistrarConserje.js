@@ -29,12 +29,6 @@ export const RegistroConserje = () => {
   const RedireccionarMenu = (e) => {
     navigate('/')
   };
-  function openMenu(){
-    setMenu("1");
-    setEsta("0");
-    setList("0");
-   
-  }
 
   const handleChange = (e) => {
     if (e.target.name === "foto") {
@@ -184,7 +178,7 @@ export const RegistroConserje = () => {
         </div>
         <div className="row" style={{ marginTop: 10 }}>
           <div className="col">
-            <button className="btn btn-dark" onClick={openMenu}>Guardar Datos</button>
+            <button className="btn btn-dark" >Guardar Datos</button>
           </div>
           <div className="col">
             <button className="btn btn-dark">Cancelar</button>
