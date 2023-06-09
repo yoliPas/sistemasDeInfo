@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Menu } from "./Menu";
 import { login } from "../service/Usuario";
+import { fetchToken } from "./Auth";
 
 export const Login = () => {
   const [miLogin, setMiLogin] = useState("False");
@@ -21,6 +22,11 @@ export const Login = () => {
       navigate("/menu");
     }
   }
+
+  useEffect(() => {
+    if (fetchToken()) navigate("/")
+  }, [])
+
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div
@@ -29,7 +35,7 @@ export const Login = () => {
           padding: 20,
         }}
       >
-        <form id="form_login" style={{borderRadius: "10px", background: "rgba(255, 255, 255, 0.5)", padding: "20px" , height:"-250px"}}>
+        <form id="form_login" style={{borderRadius: "10px",  background: "rgba(255, 255, 255, 0.5)", padding: "20px" , height:"-250px"}}>
           <div style={{ padding: "10px" }}>
             <h1 style={{ color: "#474547", textAlign: "center" }}>LOGIN</h1>
             <label htmlFor="txtusu">

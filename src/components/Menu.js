@@ -10,6 +10,7 @@ import { ListarConserje } from "./ListarConserje";
 import { ListarCopropietario } from "./ListarCopropietario";
 import { MenuPrincipal } from "./MenuPrincipal";
 import Logo from "../assets/logo.jpeg"
+import { fetchToken } from "./Auth";
 
 export const Menu =(props)=>{
 
@@ -24,6 +25,7 @@ export const Menu =(props)=>{
   const [showActualizarDpto, setActualizarDpto] = useState(false);
   const [showActualizarCons, setActualizarCons] = useState(false);
   const [showActualizarProp, setActualizarProp] = useState(false);
+  const [showMenuPrincipal, setMenuPrincipal] = useState(false);
   const [tipoRegistro, setTipoRegistro] = useState('');
 
 
@@ -44,7 +46,7 @@ export const Menu =(props)=>{
   const handleActualizar = (event) => {
     const tipo = event.target.value;
 
-    setActualizarDpto(tipo === 'tipo1');
+    setActualizarDpto(tipo === 'tipo 1');
     setActualizarCons(tipo === 'tipo2');
     setActualizarProp(tipo === 'tipo3');
     setShowRegistrar(false)
@@ -58,7 +60,8 @@ export const Menu =(props)=>{
 
 
   function cerrarSesion (){
-    navigate("/")
+    localStorage.removeItem("near@gmail.com")
+    navigate("/login")
   }
 
 
@@ -93,6 +96,9 @@ export const Menu =(props)=>{
     setMenu("0");
 
   }
+  useEffect(() => {
+    if (fetchToken()) navigate("/")
+  }, [])
 
     return (
         <>
@@ -134,7 +140,7 @@ export const Menu =(props)=>{
       </div>
 {/*        <a href="/menu" ref={redirectRef} style={{ display: 'none' }} target="_self"></a>
  */}
-        {showRegistrar && (
+      {showRegistrar && (
         <div>
           <Registrar/>
         </div>
@@ -160,6 +166,11 @@ export const Menu =(props)=>{
         </div>
       )}
       {showActualizarProp && (
+        <div>
+          <ListarCopropietario/>
+        </div>
+      )}
+      {showMenuPrincipal && (
         <div>
           <ListarCopropietario/>
         </div>

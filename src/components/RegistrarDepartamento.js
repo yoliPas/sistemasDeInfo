@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { enviarDatosDepartamento } from "../service/Departamento"
+import { enviarDatosDepartamento } from "../service/Departamento";
 import { useNavigate } from "react-router-dom";
+import {toast} from "sonner"
 
 export const Registrar = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [formulario, setFormulario] = useState({
     superficie: "",
@@ -14,21 +14,22 @@ export const Registrar = () => {
     num: "",
     foto: "",
     garaje: false,
-    boulera: false
+    boulera: false,
   });
 
   const handleGuardarDatos = () => {
-    const confirmacion = window.confirm('¿Deseas guardar los datos?');
+    const confirmacion = window.confirm("¿Deseas guardar los datos?");
     if (confirmacion) {
-      alert('Los datos se han guardado exitosamente.');
-    }};
+      alert("Los datos se han guardado exitosamente.");
+    }
+  };
 
   const handleChange = (e) => {
     if (e.target.name === "foto") {
       const file = e.target.files[0];
-  
+
       const reader = new FileReader();
-      reader.onload = function(event) {
+      reader.onload = function (event) {
         const base64String = event.target.result;
         setFormulario({ ...formulario, [e.target.name]: base64String });
       };
@@ -48,18 +49,20 @@ export const Registrar = () => {
       numero_depar: formulario.num,
       foto: formulario.foto,
       garaje: formulario.garaje,
-      boulera: formulario.boulera
+      boulera: formulario.boulera,
     };
-    enviarDatosDepartamento(data)
-      .then(responseData => {
-        console.log(responseData);
-      });
+    enviarDatosDepartamento(data).then((responseData) => {
+      console.log(responseData);
+      toast.success("El departamente fue registrado exitosamente.")
+    });
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100" style={{ marginTop: -30, marginLeft: 120,padding: 20}}>
-
-      <form id="miFormulario" onSubmit={handleSubmit}>
+    <div
+      className="container d-flex justify-content-center align-items-center vh-100"
+      style={{ marginTop: -30, marginLeft: 120, padding: 20 }}
+    >
+      <form id="miFormulario" onSubmit={() => {}}>
         <div className="h4" style={{ color: "white", textAlign: "center" }}>
           Registrar Departamento
         </div>
@@ -99,8 +102,7 @@ export const Registrar = () => {
               type="text"
               name="torre"
               value={formulario.torre}
-              onChange={handleChange
-              }
+              onChange={handleChange}
               placeholder="Torre"
               required
             />
@@ -113,8 +115,7 @@ export const Registrar = () => {
               type="text"
               name="direccion"
               value={formulario.direccion}
-              onChange={handleChange
-              }
+              onChange={handleChange}
               placeholder="Dirección"
               required
             />
@@ -129,14 +130,12 @@ export const Registrar = () => {
               type="text"
               name="num"
               value={formulario.num}
-              onChange={handleChange
-              }
+              onChange={handleChange}
               placeholder="Número departamento"
               required
             />
           </div>
         </div>
-
 
         <div className="row" style={{ marginTop: 20 }}>
           <div className="col-6">
@@ -162,36 +161,47 @@ export const Registrar = () => {
                 type="checkbox"
                 name="boulera"
                 checked={formulario.boulera}
-                onChange={handleChange
-                }
-                id="flexCheckIndeterminate" />
+                onChange={handleChange}
+                
+                id="flexCheckIndeterminate"
+              />
               <label class="form-check-label" for="flexCheckIndeterminate">
                 Boulera
               </label>
             </div>
           </div>
-
-
         </div>
-
 
         <div className="row" style={{ marginTop: 10 }}>
           <div className="col">
-            <button className="btn btn-dark" onClick={handleGuardarDatos}>Guardar</button>
+            <button className="btn btn-dark" onClick={() => handleSubmit()}>
+              Guardar
+            </button>
           </div>
           <div className="col">
-            <button className="btn btn-dark">Cancelar</button>
+            <button className="btn btn-dark" onClick={() => navigate(0)}>Cancelar</button>
           </div>
         </div>
       </form>
-      <div className="col-md-6" style={{ marginTop:10, marginLeft: 200, borderColor: "red", border: "0"}}>
-          {formulario.foto && (
-            <img src={formulario.foto} alt="Foto" className="img-fluid" style={{ width: "300px", height: "300px" }} />
-          )}
-          <input type="file" name="foto" onChange={handleChange} />
-
-        </div>
+      <div
+        className="col-md-6"
+        style={{
+          marginTop: 10,
+          marginLeft: 200,
+          borderColor: "red",
+          border: "0",
+        }}
+      >
+        {formulario.foto && (
+          <img
+            src={formulario.foto}
+            alt="Foto"
+            className="img-fluid"
+            style={{ width: "300px", height: "300px" }}
+          />
+        )}
+        <input type="file" name="foto" onChange={handleChange} />
+      </div>
     </div>
-    
   );
 };

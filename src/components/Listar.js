@@ -7,7 +7,10 @@ export const Listar =()=>{
   const [depa, setDepa] = useState([]);
 
   useEffect(()=>{
-    getDepartamento().then(data => setDepa(data))
+    getDepartamento().then(data => {
+      console.log(data)
+      setDepa(data)
+    })
   },[]);
 
 
@@ -34,7 +37,7 @@ export const Listar =()=>{
                 </thead>
                 <tbody className="text-center align-baseline">
                     {
-                      depa.map((x, index)=>(
+                      depa?.map((x, index)=>(
                         <tr key={index}>
                           <th>{index+1}</th>
                           <td>{x.superficie}</td>
